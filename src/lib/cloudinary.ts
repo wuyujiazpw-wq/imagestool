@@ -11,7 +11,14 @@ function getCloudName(): string {
   return name;
 }
 
-const CLOUD_NAME = getCloudName();
+let cloudNameCache: string | null = null;
+
+function getCachedCloudName(): string {
+  if (!cloudNameCache) {
+    cloudNameCache = getCloudName();
+  }
+  return cloudNameCache;
+}
 
 export interface TransformOptions {
   width?: number;
@@ -55,12 +62,12 @@ export function buildImageUrl(publicId: string, options: TransformOptions): stri
   }
 
   const transformStr = transforms.join(',');
-  return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/${transformStr}/${publicId}`;
+  return `https://res.cloudinary.com/${getCachedCloudName()}/image/upload/${transformStr}/${publicId}`;
 }
 
 export function getOriginalUrl(publicId: string): string {
   if (!publicId) {
     throw new Error('publicId is required to build a Cloudinary URL');
   }
-  return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/${publicId}`;
+  return `https://res.cloudinary.com/${getCachedCloudName()}/image/upload/${publicId}`;
 }

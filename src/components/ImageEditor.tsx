@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import ImageUploader from './ImageUploader';
 import FormatSelector from './FormatSelector';
 import QualitySlider from './QualitySlider';
@@ -10,7 +10,7 @@ import WatermarkPanel from './WatermarkPanel';
 import PreviewPanel from './PreviewPanel';
 import DownloadButton from './DownloadButton';
 import AdBanner from './AdBanner';
-import { buildImageUrl, getOriginalUrl } from '@/lib/cloudinary';
+import { buildImageUrl } from '@/lib/cloudinary';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 
@@ -32,12 +32,11 @@ export default function ImageEditor() {
 
   const previewUrl = useMemo(() => {
     if (!publicId) return null;
-    setIsLoading(true);
 
     const w = width ? parseInt(width) : undefined;
     const h = height ? parseInt(height) : undefined;
 
-    const url = buildImageUrl(publicId, {
+    return buildImageUrl(publicId, {
       width: w,
       height: h,
       crop: (w || h) ? (cropMode as 'fill' | 'fit' | 'scale' | 'pad' | 'crop') : undefined,
@@ -50,10 +49,14 @@ export default function ImageEditor() {
       overlayOpacity: watermarkOpacity[0],
       overlayGravity: watermarkPosition,
     });
-
-    setTimeout(() => setIsLoading(false), 300);
-    return url;
   }, [publicId, format, autoQuality, quality, width, height, cropMode, angle, flip, watermarkPublicId, watermarkOpacity, watermarkPosition]);
+
+  // Show loading state when preview URL changes
+  useEffect(() => {
+    if (previewUrl) {
+      setIsLoading(true);
+    }
+  }, [previewUrl]);
 
   const handleUpload = (id: string, url: string) => {
     setPublicId(id);
@@ -129,6 +132,7 @@ export default function ImageEditor() {
           previewUrl={previewUrl}
           originalUrl={originalUrl}
           isLoading={isLoading}
+          onLoad={() => setIsLoading(false)}
         />
         {previewUrl && (
           <DownloadButton url={previewUrl} />

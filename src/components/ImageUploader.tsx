@@ -18,6 +18,10 @@ export default function ImageUploader({ onUpload }: ImageUploaderProps) {
           onUpload(publicId, url);
         }
       }}
+      onError={(error: any) => {
+        console.error('Upload failed:', error);
+        alert('Upload failed. Please check your file and try again.');
+      }}
       options={{
         maxFiles: 1,
         multiple: false,

@@ -6,9 +6,10 @@ interface PreviewPanelProps {
   previewUrl: string | null;
   originalUrl: string | null;
   isLoading: boolean;
+  onLoad?: () => void;
 }
 
-export default function PreviewPanel({ previewUrl, originalUrl, isLoading }: PreviewPanelProps) {
+export default function PreviewPanel({ previewUrl, originalUrl, isLoading, onLoad }: PreviewPanelProps) {
   return (
     <div className="space-y-3">
       <h3 className="font-medium">Preview</h3>
@@ -18,12 +19,14 @@ export default function PreviewPanel({ previewUrl, originalUrl, isLoading }: Pre
         ) : previewUrl ? (
           <div className="relative w-full max-w-full">
             <Image
+              key={previewUrl}
               src={previewUrl}
               alt="Processed result"
               width={800}
               height={600}
               className="max-h-[500px] w-auto mx-auto object-contain"
               unoptimized
+              onLoad={onLoad}
             />
           </div>
         ) : originalUrl ? (

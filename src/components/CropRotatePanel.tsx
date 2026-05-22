@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
-import { RotateCw, FlipHorizontal, FlipVertical } from 'lucide-react';
+import { RotateCw, RotateCcw, FlipHorizontal, FlipVertical } from 'lucide-react';
 
 interface CropRotatePanelProps {
   angle: number;
@@ -22,7 +22,15 @@ export default function CropRotatePanel({ angle, onAngleChange, flip, onFlipChan
           onClick={() => onAngleChange((angle + 90) % 360)}
         >
           <RotateCw className="h-4 w-4 mr-1" />
-          Rotate
+          Rotate CW
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => onAngleChange((angle - 90 + 360) % 360)}
+        >
+          <RotateCcw className="h-4 w-4 mr-1" />
+          Rotate CCW
         </Button>
         <Button
           variant={flip === 'h' ? 'default' : 'outline'}
