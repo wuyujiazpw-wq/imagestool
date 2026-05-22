@@ -9,7 +9,7 @@ import { LanguageProvider } from '@/components/LanguageProvider';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'aiimagestool - Free Online AI Image Processing Tool',
+  title: 'AiimagesTool - Free Online AI Image Processing Tool',
   description:
     'Crop, resize, compress, convert format, and add watermarks to your images online. Free, no registration required.',
 };
