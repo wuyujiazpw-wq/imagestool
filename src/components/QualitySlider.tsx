@@ -1,7 +1,9 @@
+// src/components/QualitySlider.tsx
 'use client';
 
 import { Slider } from '@/components/ui/slider';
 import { Label } from '@/components/ui/label';
+import { useT } from './LanguageProvider';
 
 interface QualitySliderProps {
   value: number[];
@@ -11,17 +13,19 @@ interface QualitySliderProps {
 }
 
 export default function QualitySlider({ value, onChange, autoQuality, onAutoToggle }: QualitySliderProps) {
+  const { t } = useT();
+
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
-        <Label>Compression Quality</Label>
+        <Label>{t('quality.label')}</Label>
         <label className="flex items-center gap-2 text-sm text-muted-foreground">
           <input
             type="checkbox"
             checked={autoQuality}
             onChange={(e) => onAutoToggle(e.target.checked)}
           />
-          Auto optimize
+          {t('quality.auto')}
         </label>
       </div>
       {!autoQuality && (

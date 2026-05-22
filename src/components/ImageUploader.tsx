@@ -1,13 +1,17 @@
+// src/components/ImageUploader.tsx
 'use client';
 
 import { CldUploadWidget } from 'next-cloudinary';
 import { CloudUpload } from 'lucide-react';
+import { useT } from './LanguageProvider';
 
 interface ImageUploaderProps {
   onUpload: (publicId: string, originalUrl: string) => void;
 }
 
 export default function ImageUploader({ onUpload }: ImageUploaderProps) {
+  const { t } = useT();
+
   return (
     <CldUploadWidget
       uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!}
@@ -18,9 +22,8 @@ export default function ImageUploader({ onUpload }: ImageUploaderProps) {
           onUpload(publicId, url);
         }
       }}
-      onError={(error: any) => {
-        console.error('Upload failed:', error);
-        alert('Upload failed. Please check your file and try again.');
+      onError={() => {
+        alert(t('upload.error'));
       }}
       options={{
         maxFiles: 1,
@@ -36,10 +39,8 @@ export default function ImageUploader({ onUpload }: ImageUploaderProps) {
           className="border-2 border-dashed border-muted-foreground/25 rounded-xl p-12 text-center cursor-pointer hover:border-primary/50 transition-colors"
         >
           <CloudUpload className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-          <p className="text-lg font-medium mb-1">Click or drag to upload an image</p>
-          <p className="text-sm text-muted-foreground">
-            Supports JPG, PNG, WebP, AVIF. Max 10MB.
-          </p>
+          <p className="text-lg font-medium mb-1">{t('upload.hint')}</p>
+          <p className="text-sm text-muted-foreground">{t('upload.limit')}</p>
         </div>
       )}
     </CldUploadWidget>

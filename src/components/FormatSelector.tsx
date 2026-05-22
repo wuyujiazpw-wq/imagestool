@@ -1,3 +1,4 @@
+// src/components/FormatSelector.tsx
 'use client';
 
 import {
@@ -8,32 +9,29 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
+import { useT } from './LanguageProvider';
 
 interface FormatSelectorProps {
   value: string;
   onChange: (fmt: string) => void;
 }
 
-const FORMATS = [
-  { value: 'auto', label: 'Auto (keep original)' },
-  { value: 'webp', label: 'WebP' },
-  { value: 'avif', label: 'AVIF' },
-  { value: 'png', label: 'PNG' },
-  { value: 'jpg', label: 'JPEG' },
-];
+const FORMAT_KEYS = ['auto', 'webp', 'avif', 'png', 'jpg'] as const;
 
 export default function FormatSelector({ value, onChange }: FormatSelectorProps) {
+  const { t } = useT();
+
   return (
     <div className="space-y-2">
-      <Label>Output Format</Label>
+      <Label>{t('format.label')}</Label>
       <Select value={value} onValueChange={(v) => v && onChange(v)}>
         <SelectTrigger>
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
-          {FORMATS.map((f) => (
-            <SelectItem key={f.value} value={f.value}>
-              {f.label}
+          {FORMAT_KEYS.map((f) => (
+            <SelectItem key={f} value={f}>
+              {t(`format.${f}`)}
             </SelectItem>
           ))}
         </SelectContent>

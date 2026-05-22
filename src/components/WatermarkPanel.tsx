@@ -1,3 +1,4 @@
+// src/components/WatermarkPanel.tsx
 'use client';
 
 import { CldUploadWidget } from 'next-cloudinary';
@@ -12,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { useT } from './LanguageProvider';
 
 interface WatermarkPanelProps {
   watermarkPublicId: string | null;
@@ -23,21 +25,22 @@ interface WatermarkPanelProps {
   onPositionChange: (p: string) => void;
 }
 
-const POSITIONS = [
-  { value: 'south_east', label: 'Bottom Right' },
-  { value: 'south_west', label: 'Bottom Left' },
-  { value: 'north_east', label: 'Top Right' },
-  { value: 'north_west', label: 'Top Left' },
-  { value: 'center', label: 'Center' },
-];
-
 export default function WatermarkPanel({
   watermarkPublicId, onWatermarkUpload, onWatermarkRemove,
   opacity, onOpacityChange, position, onPositionChange,
 }: WatermarkPanelProps) {
+  const { t } = useT();
+  const positions = [
+    { key: 'bottomRight', value: 'south_east' },
+    { key: 'bottomLeft', value: 'south_west' },
+    { key: 'topRight', value: 'north_east' },
+    { key: 'topLeft', value: 'north_west' },
+    { key: 'center', value: 'center' },
+  ];
+
   return (
     <div className="space-y-3">
-      <Label>Watermark</Label>
+      <Label>{t('watermark.label')}</Label>
       {!watermarkPublicId ? (
         <CldUploadWidget
           uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!}
@@ -49,32 +52,32 @@ export default function WatermarkPanel({
           {({ open }) => (
             <Button variant="outline" onClick={() => open()} className="w-full">
               <ImagePlus className="h-4 w-4 mr-2" />
-              Upload Watermark
+              {t('watermark.upload')}
             </Button>
           )}
         </CldUploadWidget>
       ) : (
         <div className="space-y-3 border rounded-lg p-3">
           <div className="flex justify-between items-center">
-            <span className="text-sm text-muted-foreground">Watermark uploaded</span>
+            <span className="text-sm text-muted-foreground">{t('watermark.uploaded')}</span>
             <Button variant="ghost" size="sm" onClick={onWatermarkRemove}>
               <X className="h-4 w-4" />
             </Button>
           </div>
           <div className="space-y-1">
-            <Label className="text-xs">Opacity</Label>
+            <Label className="text-xs">{t('watermark.opacity')}</Label>
             <div className="flex items-center gap-3">
               <Slider value={opacity} onValueChange={(v) => onOpacityChange(Array.isArray(v) ? v : [v])} min={1} max={100} step={1} />
               <span className="text-sm font-mono w-10">{opacity[0]}%</span>
             </div>
           </div>
           <div className="space-y-1">
-            <Label className="text-xs">Position</Label>
+            <Label className="text-xs">{t('watermark.position')}</Label>
             <Select value={position} onValueChange={(v) => v && onPositionChange(v)}>
               <SelectTrigger><SelectValue /></SelectTrigger>
               <SelectContent>
-                {POSITIONS.map((p) => (
-                  <SelectItem key={p.value} value={p.value}>{p.label}</SelectItem>
+                {positions.map((p) => (
+                  <SelectItem key={p.value} value={p.value}>{t(`watermark.${p.key}`)}</SelectItem>
                 ))}
               </SelectContent>
             </Select>

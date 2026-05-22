@@ -1,3 +1,4 @@
+// src/components/ImageEditor.tsx
 'use client';
 
 import { useState, useMemo, useEffect } from 'react';
@@ -13,8 +14,10 @@ import AdBanner from './AdBanner';
 import { buildImageUrl } from '@/lib/cloudinary';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
+import { useT } from './LanguageProvider';
 
 export default function ImageEditor() {
+  const { t } = useT();
   const [publicId, setPublicId] = useState<string | null>(null);
   const [originalUrl, setOriginalUrl] = useState<string | null>(null);
   const [format, setFormat] = useState('auto');
@@ -51,7 +54,6 @@ export default function ImageEditor() {
     });
   }, [publicId, format, autoQuality, quality, width, height, cropMode, angle, flip, watermarkPublicId, watermarkOpacity, watermarkPosition]);
 
-  // Show loading state when preview URL changes
   useEffect(() => {
     if (previewUrl) {
       setIsLoading(true);
@@ -75,7 +77,6 @@ export default function ImageEditor() {
 
   return (
     <div className="grid lg:grid-cols-3 gap-6">
-      {/* Left: Upload + Controls */}
       <div className="lg:col-span-2 space-y-6">
         <ImageUploader onUpload={handleUpload} />
 
@@ -84,7 +85,7 @@ export default function ImageEditor() {
             <Separator />
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">Edit Options</CardTitle>
+                <CardTitle className="text-lg">{t('editor.options')}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <FormatSelector value={format} onChange={setFormat} />
@@ -126,7 +127,6 @@ export default function ImageEditor() {
         )}
       </div>
 
-      {/* Right: Preview + Download + Ads */}
       <div className="space-y-4">
         <PreviewPanel
           previewUrl={previewUrl}

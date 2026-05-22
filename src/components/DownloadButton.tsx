@@ -1,7 +1,9 @@
+// src/components/DownloadButton.tsx
 'use client';
 
 import { Button } from '@/components/ui/button';
 import { Download } from 'lucide-react';
+import { useT } from './LanguageProvider';
 
 interface DownloadButtonProps {
   url: string | null;
@@ -10,6 +12,8 @@ interface DownloadButtonProps {
 }
 
 export default function DownloadButton({ url, filename = 'processed-image', onBeforeDownload }: DownloadButtonProps) {
+  const { t } = useT();
+
   if (!url) return null;
 
   return (
@@ -27,7 +31,7 @@ export default function DownloadButton({ url, filename = 'processed-image', onBe
       }}
     >
       <Download className="h-5 w-5 mr-2" />
-      Download Processed Image
+      {t('download.button')}
     </Button>
   );
 }

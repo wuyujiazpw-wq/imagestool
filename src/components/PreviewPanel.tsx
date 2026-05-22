@@ -1,6 +1,8 @@
+// src/components/PreviewPanel.tsx
 'use client';
 
 import Image from 'next/image';
+import { useT } from './LanguageProvider';
 
 interface PreviewPanelProps {
   previewUrl: string | null;
@@ -10,12 +12,14 @@ interface PreviewPanelProps {
 }
 
 export default function PreviewPanel({ previewUrl, originalUrl, isLoading, onLoad }: PreviewPanelProps) {
+  const { t } = useT();
+
   return (
     <div className="space-y-3">
-      <h3 className="font-medium">Preview</h3>
+      <h3 className="font-medium">{t('preview.label')}</h3>
       <div className="border rounded-xl overflow-hidden bg-muted/30 min-h-[300px] flex items-center justify-center">
         {isLoading ? (
-          <p className="text-muted-foreground animate-pulse">Processing...</p>
+          <p className="text-muted-foreground animate-pulse">{t('preview.processing')}</p>
         ) : previewUrl ? (
           <div className="relative w-full max-w-full">
             <Image
@@ -39,7 +43,7 @@ export default function PreviewPanel({ previewUrl, originalUrl, isLoading, onLoa
             unoptimized
           />
         ) : (
-          <p className="text-muted-foreground">Upload an image to start</p>
+          <p className="text-muted-foreground">{t('preview.empty')}</p>
         )}
       </div>
     </div>
