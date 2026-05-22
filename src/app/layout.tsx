@@ -11,9 +11,9 @@ const inter = Inter({ subsets: ['latin'] });
 const baseUrl = 'https://aiimagestool.com';
 
 export const metadata: Metadata = {
-  title: 'AiimagesTool - Free Online AI Image Processing Tool',
+  title: 'Free AI Image Processing Tool Online - No Sign Up Required | AiimagesTool',
   description:
-    'Crop, resize, compress, convert format, and add watermarks to your images online. Free, no registration required.',
+    'Free online AI image processing tool. No registration or login needed. Crop, resize, compress, convert format (JPG, PNG, WebP, AVIF), rotate, and add watermarks to your images instantly in your browser.',
   metadataBase: new URL(baseUrl),
   alternates: {
     canonical: baseUrl,
@@ -26,9 +26,9 @@ export const metadata: Metadata = {
     'google-adsense-account': 'ca-pub-3646388292078835',
   },
   openGraph: {
-    title: 'AiimagesTool - Free Online AI Image Processing Tool',
+    title: 'Free AI Image Processing Tool Online - No Sign Up Required',
     description:
-      'Crop, resize, compress, convert format, and add watermarks to your images online. Free, no registration required.',
+      'Free online AI image processing tool. No registration or login needed. Crop, resize, compress, convert format, rotate, and add watermarks to your images instantly.',
     url: baseUrl,
     siteName: 'AiimagesTool',
     locale: 'en_US',
@@ -37,9 +37,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AiimagesTool - Free Online AI Image Processing Tool',
+    title: 'Free AI Image Processing Tool Online - No Sign Up Required',
     description:
-      'Crop, resize, compress, convert format, and add watermarks to your images online. Free, no registration required.',
+      'Free online AI image processing tool. No registration or login needed. Crop, resize, compress, convert format, rotate, and add watermarks instantly.',
   },
   robots: {
     index: true,
@@ -67,10 +67,10 @@ export default function RootLayout({
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'WebApplication',
-              name: 'AiimagesTool',
+              name: 'AiimagesTool - Free AI Image Processing Tool',
               url: baseUrl,
               description:
-                'Crop, resize, compress, convert format, and add watermarks to your images online. Free, no registration required.',
+                'Free online AI image processing tool. No registration or login needed. Crop, resize, compress, convert format, rotate, and add watermarks to your images instantly.',
               applicationCategory: 'Multimedia',
               operatingSystem: 'All',
               browserRequirements: 'Requires JavaScript',

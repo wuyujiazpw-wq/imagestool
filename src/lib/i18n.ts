@@ -12,8 +12,8 @@ export const translations: Record<Locale, Record<string, string>> = {
     'footer.copyright': 'Free online AI image processing tool.',
 
     // Homepage
-    'home.title': 'Free Online AI Image Processing Tool',
-    'home.subtitle': 'No registration required. Crop, resize, compress, convert formats, and add watermarks.',
+    'home.title': 'Free AI Image Processing Tool - No Registration Required',
+    'home.subtitle': 'Free online tool. No sign-up needed. Crop, resize, compress, convert JPG/PNG/WebP/AVIF formats, rotate, and add watermarks to your images in seconds.',
 
     // Upload
     'upload.hint': 'Click or drag to upload an image',
@@ -88,8 +88,8 @@ export const translations: Record<Locale, Record<string, string>> = {
     'footer.copyright': '免费在线图片处理工具。',
 
     // Homepage
-    'home.title': '免费在线图片处理工具',
-    'home.subtitle': '无需注册。AI 裁剪、缩放、压缩、转换格式、添加水印。',
+    'home.title': '免费在线 AI 图片处理工具 - 无需注册',
+    'home.subtitle': '完全免费，无需注册登录。在线裁剪、缩放、压缩、转换 JPG/PNG/WebP/AVIF 格式、旋转、添加水印。浏览器内一键处理。',
 
     // Upload
     'upload.hint': '点击或拖拽上传图片',
