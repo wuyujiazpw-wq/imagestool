@@ -9,11 +9,13 @@ import { useT } from './LanguageProvider';
 interface CropRotatePanelProps {
   angle: number;
   onAngleChange: (a: number) => void;
-  flip: 'h' | 'v' | undefined;
-  onFlipChange: (f: 'h' | 'v' | undefined) => void;
+  flipH: boolean;
+  flipV: boolean;
+  onFlipHChange: (v: boolean) => void;
+  onFlipVChange: (v: boolean) => void;
 }
 
-export default function CropRotatePanel({ angle, onAngleChange, flip, onFlipChange }: CropRotatePanelProps) {
+export default function CropRotatePanel({ angle, onAngleChange, flipH, flipV, onFlipHChange, onFlipVChange }: CropRotatePanelProps) {
   const { t } = useT();
 
   return (
@@ -37,17 +39,17 @@ export default function CropRotatePanel({ angle, onAngleChange, flip, onFlipChan
           {t('rotate.ccw')}
         </Button>
         <Button
-          variant={flip === 'h' ? 'default' : 'outline'}
+          variant={flipH ? 'default' : 'outline'}
           size="sm"
-          onClick={() => onFlipChange(flip === 'h' ? undefined : 'h')}
+          onClick={() => onFlipHChange(!flipH)}
         >
           <FlipHorizontal className="h-4 w-4 mr-1" />
           {t('rotate.flipH')}
         </Button>
         <Button
-          variant={flip === 'v' ? 'default' : 'outline'}
+          variant={flipV ? 'default' : 'outline'}
           size="sm"
-          onClick={() => onFlipChange(flip === 'v' ? undefined : 'v')}
+          onClick={() => onFlipVChange(!flipV)}
         >
           <FlipVertical className="h-4 w-4 mr-1" />
           {t('rotate.flipV')}

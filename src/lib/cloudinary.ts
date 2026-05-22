@@ -27,7 +27,8 @@ export interface TransformOptions {
   quality?: number | 'auto';
   format?: 'jpg' | 'png' | 'webp' | 'avif' | 'auto';
   angle?: number;
-  flip?: 'h' | 'v';
+  flipH?: boolean;
+  flipV?: boolean;
   effect?: string;
   overlay?: string;
   overlayWidth?: number;
@@ -49,8 +50,8 @@ export function buildImageUrl(publicId: string, options: TransformOptions): stri
   }
   if (options.format) transforms.push(`f_${options.format}`);
   if (options.angle) transforms.push(`a_${options.angle}`);
-  if (options.flip === 'h') transforms.push('e_hflip');
-  if (options.flip === 'v') transforms.push('e_vflip');
+  if (options.flipH) transforms.push('e_hflip');
+  if (options.flipV) transforms.push('e_vflip');
   if (options.effect) transforms.push(`e_${options.effect}`);
 
   if (options.overlay) {

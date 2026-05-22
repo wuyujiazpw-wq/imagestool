@@ -1,7 +1,7 @@
 // src/components/ImageEditor.tsx
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import ImageUploader from './ImageUploader';
 import FormatSelector from './FormatSelector';
 import QualitySlider from './QualitySlider';
@@ -27,11 +27,11 @@ export default function ImageEditor() {
   const [height, setHeight] = useState('');
   const [cropMode, setCropMode] = useState('fill');
   const [angle, setAngle] = useState(0);
-  const [flip, setFlip] = useState<'h' | 'v' | undefined>(undefined);
+  const [flipH, setFlipH] = useState(false);
+  const [flipV, setFlipV] = useState(false);
   const [watermarkPublicId, setWatermarkPublicId] = useState<string | null>(null);
   const [watermarkOpacity, setWatermarkOpacity] = useState([70]);
   const [watermarkPosition, setWatermarkPosition] = useState('south_east');
-  const [isLoading, setIsLoading] = useState(false);
 
   const previewUrl = useMemo(() => {
     if (!publicId) return null;
@@ -46,25 +46,21 @@ export default function ImageEditor() {
       quality: autoQuality ? 'auto' : quality[0],
       format: format === 'auto' ? undefined : (format as 'jpg' | 'png' | 'webp' | 'avif'),
       angle: angle || undefined,
-      flip,
+      flipH,
+      flipV,
       overlay: watermarkPublicId || undefined,
       overlayWidth: 150,
       overlayOpacity: watermarkOpacity[0],
       overlayGravity: watermarkPosition,
     });
-  }, [publicId, format, autoQuality, quality, width, height, cropMode, angle, flip, watermarkPublicId, watermarkOpacity, watermarkPosition]);
-
-  useEffect(() => {
-    if (previewUrl) {
-      setIsLoading(true);
-    }
-  }, [previewUrl]);
+  }, [publicId, format, autoQuality, quality, width, height, cropMode, angle, flipH, flipV, watermarkPublicId, watermarkOpacity, watermarkPosition]);
 
   const handleUpload = (id: string, url: string) => {
     setPublicId(id);
     setOriginalUrl(url);
     setAngle(0);
-    setFlip(undefined);
+    setFlipH(false);
+    setFlipV(false);
     setFormat('auto');
     setAutoQuality(true);
     setQuality([80]);
@@ -108,8 +104,10 @@ export default function ImageEditor() {
                 <CropRotatePanel
                   angle={angle}
                   onAngleChange={setAngle}
-                  flip={flip}
-                  onFlipChange={setFlip}
+                  flipH={flipH}
+                  flipV={flipV}
+                  onFlipHChange={setFlipH}
+                  onFlipVChange={setFlipV}
                 />
                 <Separator />
                 <WatermarkPanel
@@ -131,8 +129,6 @@ export default function ImageEditor() {
         <PreviewPanel
           previewUrl={previewUrl}
           originalUrl={originalUrl}
-          isLoading={isLoading}
-          onLoad={() => setIsLoading(false)}
         />
         {previewUrl && (
           <DownloadButton url={previewUrl} />
