@@ -75,6 +75,7 @@ export const translations: Record<Locale, Record<string, string>> = {
 
     // Download
     'download.button': 'Download Processed Image',
+    'download.processing': 'Processing...',
 
     // Upload error
     'upload.error': 'Upload failed. Please check your file and try again.',
@@ -152,6 +153,7 @@ export const translations: Record<Locale, Record<string, string>> = {
 
     // Download
     'download.button': '下载处理后的图片',
+    'download.processing': '下载中...',
 
     // Upload error
     'upload.error': '上传失败，请检查文件后重试。',

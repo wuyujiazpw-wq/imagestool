@@ -17,11 +17,14 @@ export default function PreviewPanel({ previewUrl, originalUrl, isLoading, onLoa
   return (
     <div className="space-y-3">
       <h3 className="font-medium">{t('preview.label')}</h3>
-      <div className="border rounded-xl overflow-hidden bg-muted/30 min-h-[300px] flex items-center justify-center">
-        {isLoading ? (
-          <p className="text-muted-foreground animate-pulse">{t('preview.processing')}</p>
-        ) : previewUrl ? (
-          <div className="relative w-full max-w-full">
+      <div className="border rounded-xl overflow-hidden bg-muted/30 min-h-[300px] flex items-center justify-center relative">
+        {isLoading && (
+          <div className="absolute inset-0 z-10 flex items-center justify-center bg-muted/30 rounded-xl">
+            <p className="text-muted-foreground animate-pulse">{t('preview.processing')}</p>
+          </div>
+        )}
+        {previewUrl ? (
+          <div className={`relative w-full max-w-full ${isLoading ? 'opacity-50' : ''}`}>
             <Image
               key={previewUrl}
               src={previewUrl}
