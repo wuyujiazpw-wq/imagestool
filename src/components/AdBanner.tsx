@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 interface AdBannerProps {
   slot: string;
@@ -9,7 +9,6 @@ interface AdBannerProps {
 }
 
 export default function AdBanner({ slot, format = 'auto', className = '' }: AdBannerProps) {
-  const adRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     try {
@@ -21,7 +20,7 @@ export default function AdBanner({ slot, format = 'auto', className = '' }: AdBa
   }, []);
 
   return (
-    <div className={`flex justify-center my-4 ${className}`} ref={adRef}>
+    <div className={`flex justify-center my-4 ${className}`}>
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
