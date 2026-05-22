@@ -4,6 +4,7 @@
 import Link from 'next/link';
 import { useT } from './LanguageProvider';
 import LanguageToggle from './LanguageToggle';
+import ThemeToggle from './ThemeToggle';
 
 export default function Header() {
   const { t } = useT();
@@ -23,6 +24,7 @@ export default function Header() {
               {t('header.privacy')}
             </Link>
           </nav>
+          <ThemeToggle />
           <LanguageToggle />
         </div>
       </div>

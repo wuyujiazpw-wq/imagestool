@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Script from 'next/script';
 import { LanguageProvider } from '@/components/LanguageProvider';
+import { ThemeProvider } from '@/components/ThemeProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -55,11 +56,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} min-h-screen flex flex-col`}>
+        <ThemeProvider>
         <LanguageProvider>
           <Header />
           <main className="flex-1 container mx-auto px-4 py-8">{children}</main>
           <Footer />
         </LanguageProvider>
+        </ThemeProvider>
         <Script
           id="schema-structured-data"
           type="application/ld+json"
