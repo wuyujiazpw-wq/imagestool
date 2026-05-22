@@ -22,6 +22,9 @@ export const metadata: Metadata = {
       zh: baseUrl,
     },
   },
+  other: {
+    'google-adsense-account': 'ca-pub-3646388292078835',
+  },
   openGraph: {
     title: 'AiimagesTool - Free Online AI Image Processing Tool',
     description:
