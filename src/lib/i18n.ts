@@ -53,8 +53,6 @@ export const translations: Record<Locale, Record<string, string>> = {
     'rotate.label': 'Rotate & Flip',
     'rotate.cw': 'Rotate CW',
     'rotate.ccw': 'Rotate CCW',
-    'rotate.flipH': 'Flip H',
-    'rotate.flipV': 'Flip V',
 
     // Watermark
     'watermark.label': 'Watermark',
@@ -131,8 +129,6 @@ export const translations: Record<Locale, Record<string, string>> = {
     'rotate.label': '旋转与翻转',
     'rotate.cw': '顺时针旋转',
     'rotate.ccw': '逆时针旋转',
-    'rotate.flipH': '水平翻转',
-    'rotate.flipV': '垂直翻转',
 
     // Watermark
     'watermark.label': '水印',
