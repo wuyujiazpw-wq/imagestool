@@ -30,13 +30,15 @@ export default function QualitySlider({ value, onChange, autoQuality, onAutoTogg
       </div>
       {!autoQuality && (
         <div className="flex items-center gap-3">
-          <Slider
-            value={value}
-            onValueChange={(v) => onChange(Array.isArray(v) ? v : [v])}
-            min={1}
-            max={100}
-            step={1}
-          />
+          <div className="flex-1">
+            <Slider
+              value={value}
+              onValueChange={(v) => onChange(Array.isArray(v) ? v : [v])}
+              min={1}
+              max={100}
+              step={1}
+            />
+          </div>
           <span className="text-sm font-mono w-10 text-right">{value[0]}%</span>
         </div>
       )}
