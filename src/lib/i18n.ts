@@ -9,10 +9,10 @@ export const translations: Record<Locale, Record<string, string>> = {
     'header.privacy': 'Privacy',
 
     // Footer
-    'footer.copyright': 'Free online image processing tool.',
+    'footer.copyright': 'Free online AI image processing tool.',
 
     // Homepage
-    'home.title': 'Free Online Image Processing Tool',
+    'home.title': 'Free Online AI Image Processing Tool',
     'home.subtitle': 'No registration required. Crop, resize, compress, convert formats, and add watermarks.',
 
     // Upload
@@ -89,7 +89,7 @@ export const translations: Record<Locale, Record<string, string>> = {
 
     // Homepage
     'home.title': '免费在线图片处理工具',
-    'home.subtitle': '无需注册。裁剪、缩放、压缩、转换格式、添加水印。',
+    'home.subtitle': '无需注册。AI 裁剪、缩放、压缩、转换格式、添加水印。',
 
     // Upload
     'upload.hint': '点击或拖拽上传图片',
