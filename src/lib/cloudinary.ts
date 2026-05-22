@@ -1,6 +1,17 @@
 // src/lib/cloudinary.ts
 
-const CLOUD_NAME = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || '';
+function getCloudName(): string {
+  const name = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+  if (!name) {
+    throw new Error(
+      'NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME is not configured. ' +
+      'Set it in .env.local or your deployment environment variables.'
+    );
+  }
+  return name;
+}
+
+const CLOUD_NAME = getCloudName();
 
 export interface TransformOptions {
   width?: number;
@@ -9,15 +20,18 @@ export interface TransformOptions {
   quality?: number | 'auto';
   format?: 'jpg' | 'png' | 'webp' | 'avif' | 'auto';
   angle?: number;
-  flip?: 'h' | 'v' | null;
+  flip?: 'h' | 'v';
   effect?: string;
-  overlay?: string;           // 水印 public ID
+  overlay?: string;
   overlayWidth?: number;
   overlayOpacity?: number;
-  overlayGravity?: string;     // 'north_west' | 'north_east' | 'south_west' | 'south_east' | 'center'
+  overlayGravity?: string;
 }
 
 export function buildImageUrl(publicId: string, options: TransformOptions): string {
+  if (!publicId) {
+    throw new Error('publicId is required to build a Cloudinary URL');
+  }
   const transforms: string[] = [];
 
   if (options.width) transforms.push(`w_${options.width}`);
@@ -45,5 +59,8 @@ export function buildImageUrl(publicId: string, options: TransformOptions): stri
 }
 
 export function getOriginalUrl(publicId: string): string {
+  if (!publicId) {
+    throw new Error('publicId is required to build a Cloudinary URL');
+  }
   return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/${publicId}`;
 }
