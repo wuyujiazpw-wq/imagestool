@@ -23,6 +23,11 @@ export const metadata: Metadata = {
       zh: baseUrl,
     },
   },
+  verification: {
+    other: {
+      'baidu-site-verification': 'codeva-6ag9OP49XC',
+    },
+  },
   other: {
     'google-adsense-account': 'ca-pub-3646388292078835',
   },
